@@ -2,6 +2,7 @@ package br.com.fsc.orgs.ui.activity
 
 import android.app.Activity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import br.com.fsc.orgs.R
 import br.com.fsc.orgs.R.id.rview_produtos
@@ -9,7 +10,7 @@ import br.com.fsc.orgs.modelo.Jogo
 import br.com.fsc.orgs.ui.reciclerview.adapter.ListaJogosAdapter
 import java.math.BigDecimal
 
-class MainActivity: Activity(){
+class MainActivity: AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
