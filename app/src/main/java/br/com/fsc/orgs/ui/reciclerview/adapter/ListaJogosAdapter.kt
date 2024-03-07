@@ -2,45 +2,51 @@ package br.com.fsc.orgs.ui.reciclerview.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import br.com.fsc.orgs.R
+import br.com.fsc.orgs.databinding.ProdutoItemBinding
 import br.com.fsc.orgs.modelo.Jogo
+import java.text.NumberFormat
+import java.util.Locale
 
-class ListaJogosAdapter (
-    private val jogos: List<Jogo>,
-    private val context: Context
-        ) : RecyclerView.Adapter<ListaJogosAdapter.ViewHolder>() {
+class ListaJogosAdapter (jogos: List<Jogo>, private val context: Context)
+    : RecyclerView.Adapter<ListaJogosAdapter.ViewHolder>() {
 
-    class ViewHolder (view: View): RecyclerView.ViewHolder(view) {
+    private val jogoslistaInterna = jogos.toMutableList()
+
+    class ViewHolder(private val binding: ProdutoItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun vincula(jogo: Jogo) {
-            val nome = itemView.findViewById<TextView>(R.id.nome)
+            val nome = binding.nome
             nome.text = jogo.nome
 
-            val descricao = itemView.findViewById<TextView>(R.id.descricao)
+            val descricao = binding.descricao
             descricao.text = jogo.descricao
 
-            val valor = itemView.findViewById<TextView>(R.id.preco)
-            valor.text = jogo.valor.toPlainString()
+            val valor = binding.preco
+            val formatador: NumberFormat = NumberFormat.getCurrencyInstance(Locale("pt","br"))
+            val valorEmReais: String = formatador.format(jogo.valor)
+            valor.text = valorEmReais
 
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.produto_item, parent, false)
-        return ViewHolder(view)
+        val binding = ProdutoItemBinding.inflate(inflater, parent, false)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        return jogos.size
+        return jogoslistaInterna.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val jogo = jogos[position]
+        val jogo = jogoslistaInterna[position]
         holder.vincula(jogo)
     }
 
+    fun atualizaLista(jogos: List<Jogo>) {
+        this.jogoslistaInterna.clear()
+        this.jogoslistaInterna.addAll(jogos)
+        notifyDataSetChanged()
+    }
 }

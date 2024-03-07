@@ -30,7 +30,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildToolsVersion '35.0.0 rc1'
+
+       buildToolsVersion '35.0.0 rc1'
+
+    buildFeatures {
+        viewBinding true
+    }
+
 }
 
 dependencies {
