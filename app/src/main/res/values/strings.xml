@@ -1,3 +1,7 @@
 <resources>
+<<<<<<< HEAD
     <string name="app_name">Orgs</string>
+=======
+    <string name="app_name">AluGames</string>
+>>>>>>> a4ded8e529f5710ff4470f450a44ca70187f1f11
 </resources>

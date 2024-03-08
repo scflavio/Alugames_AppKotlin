@@ -10,10 +10,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+<<<<<<< HEAD
         android:theme="@style/Theme.Orgs"
         tools:targetApi="31">
 
         <activity android:name=".ui.activity.ListaJogosActivity"
+=======
+        android:theme="@style/Theme.AluGames"
+        tools:targetApi="31" >
+
+
+        <activity android:name=".ui.activity.MainActivity"
+>>>>>>> a4ded8e529f5710ff4470f450a44ca70187f1f11
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +32,7 @@
 
         <activity android:name=".ui.activity.FormularioJogoActivity"
             android:exported="true">
+<<<<<<< HEAD
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,5 +46,12 @@
 
 
     </application>
+=======
+        </activity>
+
+    </application>
+
+
+>>>>>>> a4ded8e529f5710ff4470f450a44ca70187f1f11
 
 </manifest>

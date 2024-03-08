@@ -12,5 +12,9 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+<<<<<<< HEAD
 rootProject.name = "Orgs"
+=======
+rootProject.name = "AluGames"
+>>>>>>> a4ded8e529f5710ff4470f450a44ca70187f1f11
 include ':app'
