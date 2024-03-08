@@ -1,4 +1,4 @@
-package br.com.fsc.orgs.modelo
+package br.com.flavio.alugames.modelo
 
 import java.math.BigDecimal
 

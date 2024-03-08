@@ -1,6 +1,6 @@
-package br.com.fsc.orgs.dao
+package br.com.flavio.alugames.dao
 
-import br.com.fsc.orgs.modelo.Jogo
+import br.com.flavio.alugames.modelo.Jogo
 import java.math.BigDecimal
 
 class JogosDao {
