@@ -7,29 +7,33 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.flavio.alugames.R
+import br.com.flavio.alugames.databinding.JogoItemBinding
 import br.com.flavio.alugames.model.Jogo
 
 class ListaProdutosAdapter(
     private val context: Context,
     jogos: List<Jogo>
 ) : RecyclerView.Adapter<ListaProdutosAdapter.ViewHolder>() {
-    private val jogos = jogos.toMutableList()
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+     private val jogos = jogos.toMutableList()
+    class ViewHolder(binding: JogoItemBinding):RecyclerView.ViewHolder(binding.root) {
+
+        private val nome = binding.jogoItemNome
+        private val descricao = binding.jogoItemDescricao
+        private val valor = binding.jogoItemValor
 
         fun vincula(jogo: Jogo) {
-            val nome = itemView.findViewById<TextView>(R.id.nome)
+
             nome.text = jogo.nome
-            val descricao = itemView.findViewById<TextView>(R.id.descricao)
             descricao.text = jogo.descricao
-            val valor = itemView.findViewById<TextView>(R.id.valor)
-            valor.text = jogo.valor.toPlainString()
+            valor.text = jogo.valor.toString()
+
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.produto_item, parent, false)
-        return ViewHolder(view)
+        val binding = JogoItemBinding.inflate(LayoutInflater.from(context),parent,false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
