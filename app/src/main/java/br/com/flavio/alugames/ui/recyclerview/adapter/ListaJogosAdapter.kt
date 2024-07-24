@@ -11,9 +11,9 @@ import br.com.flavio.alugames.model.Jogo
 
 class ListaProdutosAdapter(
     private val context: Context,
-    private val jogos: List<Jogo>
+    jogos: List<Jogo>
 ) : RecyclerView.Adapter<ListaProdutosAdapter.ViewHolder>() {
-
+    private val jogos = jogos.toMutableList()
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun vincula(jogo: Jogo) {
@@ -24,7 +24,6 @@ class ListaProdutosAdapter(
             val valor = itemView.findViewById<TextView>(R.id.valor)
             valor.text = jogo.valor.toPlainString()
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,5 +38,9 @@ class ListaProdutosAdapter(
     }
 
     override fun getItemCount(): Int = jogos.size
-
+    fun atualiza(jogos: List<Jogo>) {
+        this.jogos.clear()
+        this.jogos.addAll(jogos)
+        notifyDataSetChanged()
+    }
 }
