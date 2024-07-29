@@ -11,7 +11,7 @@ import br.com.flavio.alugames.databinding.ActivityListaJogosBinding
 import br.com.flavio.alugames.ui.recyclerview.adapter.ListaProdutosAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class ListaJogosActivity : AppCompatActivity(R.layout.activity_lista_jogos) {
+class ListaJogosActivity : AppCompatActivity() {
 
     private val dao = jogosDao()
     private val adapter =  ListaProdutosAdapter(context = this, jogos = dao.buscaTodos())
@@ -33,7 +33,7 @@ class ListaJogosActivity : AppCompatActivity(R.layout.activity_lista_jogos) {
     }
 
     private fun configuraFab() {
-        val fabLista = binding.activityListaJogosFloatingActionButton
+        val fabLista = binding.listaJogoBtnCadastrar
         fabLista.setOnClickListener {
             intentFormularioJogo()
         }
@@ -47,7 +47,15 @@ class ListaJogosActivity : AppCompatActivity(R.layout.activity_lista_jogos) {
     private fun configuraRecyclerView() {
         val recyclerView = binding.recyclerView
         recyclerView.adapter = adapter
-        Log.i("Main activity", "Criou adapter")
+        adapter.cliqueNaListaListener = {
+            Log.i("Lista Jogos", "Clique ${it}")
+            val intent = Intent(this, DetalhesProdutoActivity::class.java).apply {
+                putExtra(CHAVE_JOGO, it)
+            }
+            startActivity(intent)
+        }
+
+
 
     }
 }

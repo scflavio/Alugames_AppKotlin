@@ -1,6 +1,7 @@
 package br.com.flavio.alugames.dao
 
 import br.com.flavio.alugames.model.Jogo
+import java.math.BigDecimal
 
 class jogosDao {
 
@@ -14,6 +15,12 @@ class jogosDao {
     }
 
     companion object {
-        private val jogos = mutableListOf<Jogo>()
+        private val jogos = mutableListOf<Jogo>(
+            Jogo(
+                nome = "Res. Evil: Gun Survivor",
+                descricao = "Jogo retrô PS1",
+                valor = BigDecimal("99.99")
+            )
+        )
     }
 }

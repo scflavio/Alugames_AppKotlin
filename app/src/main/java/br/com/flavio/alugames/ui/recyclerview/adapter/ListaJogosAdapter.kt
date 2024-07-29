@@ -1,38 +1,65 @@
 package br.com.flavio.alugames.ui.recyclerview.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.flavio.alugames.R
 import br.com.flavio.alugames.databinding.JogoItemBinding
+import br.com.flavio.alugames.extensions.carregaImagemCoil
 import br.com.flavio.alugames.model.Jogo
+import coil.load
+import java.text.NumberFormat
+import java.util.Locale
+import kotlin.math.log
 
 class ListaProdutosAdapter(
     private val context: Context,
-    jogos: List<Jogo>
+    jogos: List<Jogo>,
+    var cliqueNaListaListener: (jogo: Jogo) -> Unit = {}
 ) : RecyclerView.Adapter<ListaProdutosAdapter.ViewHolder>() {
 
-     private val jogos = jogos.toMutableList()
-    class ViewHolder(binding: JogoItemBinding):RecyclerView.ViewHolder(binding.root) {
+    private val jogos = jogos.toMutableList()
 
-        private val nome = binding.jogoItemNome
-        private val descricao = binding.jogoItemDescricao
-        private val valor = binding.jogoItemValor
+
+    inner class ViewHolder(private val binding: JogoItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        private lateinit var jogo: Jogo
+
+        init {
+            itemView.setOnClickListener {
+                if (::jogo.isInitialized){
+                    cliqueNaListaListener(jogo)
+                }
+            }
+        }
 
         fun vincula(jogo: Jogo) {
+            this.jogo = jogo
 
+            val nome = binding.jogoItemNome
             nome.text = jogo.nome
-            descricao.text = jogo.descricao
-            valor.text = jogo.valor.toString()
 
+            val descricao = binding.jogoItemDescricao
+            descricao.text = jogo.descricao
+
+            val valor = binding.jogoItemValor
+            val valorEmReal = formataValorReal(jogo)
+            valor.text = valorEmReal
+
+            binding.imageView.carregaImagemCoil(jogo.imagem)
+        }
+
+        private fun formataValorReal(jogo: Jogo): String? {
+            val formatadorMoeda = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
+            return formatadorMoeda.format(jogo.valor)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = JogoItemBinding.inflate(LayoutInflater.from(context),parent,false)
+        val binding = JogoItemBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding)
     }
 
