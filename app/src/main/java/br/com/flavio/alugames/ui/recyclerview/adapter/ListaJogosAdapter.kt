@@ -16,7 +16,7 @@ import kotlin.math.log
 
 class ListaProdutosAdapter(
     private val context: Context,
-    jogos: List<Jogo>,
+    jogos: List<Jogo> = emptyList(),
     var cliqueNaListaListener: (jogo: Jogo) -> Unit = {}
 ) : RecyclerView.Adapter<ListaProdutosAdapter.ViewHolder>() {
 
